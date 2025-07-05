@@ -1,98 +1,128 @@
-Template de Dashboard com Next.js, NextAuth e MUI
-Este é um projeto de template inicial para a criação de dashboards modernos, construído com Next.js (App Router), NextAuth.js para autenticação, Material-UI (MUI) para componentes de interface e @mui/x-charts para visualização de dados.
+# 🧩 Template de Dashboard com Next.js, NextAuth e MUI
 
-O objetivo deste template é fornecer uma base sólida e pronta para uso, incluindo autenticação segura, proteção de rotas e exemplos de gráficos dinâmicos, permitindo que os desenvolvedores se concentrem na lógica de negócios específica de sua aplicação.
+Este é um projeto de **template inicial para a criação de dashboards modernos**, construído com:
 
-✨ Principais Funcionalidades
-Autenticação Completa: Sistema de login/logout pronto para uso com NextAuth.js.
+- **Next.js (App Router)**
+- **NextAuth.js** para autenticação
+- **Material-UI (MUI)** para componentes de interface
+- **@mui/x-charts** para visualização de dados
 
-Proteção de Rotas: Utiliza um UserSessionProvider customizado para proteger rotas e redirecionar usuários não autenticados.
+O objetivo é fornecer uma base sólida e pronta para uso, com autenticação segura, proteção de rotas e exemplos de gráficos dinâmicos. Assim, os desenvolvedores podem focar na lógica de negócio específica da aplicação.
 
-Página de Perfil: Uma página de perfil de usuário que exibe informações da sessão e permite o logout.
+---
 
-Dashboard com Gráficos: Exemplos de gráficos de barras e de pizza responsivos usando @mui/x-charts com dados gerados dinamicamente.
+## ✨ Principais Funcionalidades
 
-Estrutura Moderna: Construído com o App Router do Next.js 14+ e componentes "Server-Side" e "Client-Side".
+- 🔐 **Autenticação Completa**: Sistema de login/logout com NextAuth.js
+- 🛡 **Proteção de Rotas**: Via `UserSessionProvider` customizado
+- 👤 **Página de Perfil**: Exibe dados da sessão e botão de logout
+- 📊 **Dashboard com Gráficos**: Exemplos de gráficos de barras e pizza usando `@mui/x-charts`
+- ⚙️ **Estrutura Moderna**: Next.js 14+ com App Router, componentes Server/Client
+- 🎨 **UI com Material-UI**: Interface consistente e elegante
 
-UI com Material-UI: Interface elegante e consistente utilizando a biblioteca de componentes Material-UI.
+---
 
-🚀 Como Começar
-Siga estas instruções para obter uma cópia do projeto e executá-la em sua máquina local para desenvolvimento e testes.
+## 🚀 Como Começar
 
-Pré-requisitos
-Node.js (versão 18.x ou superior)
+Siga os passos abaixo para rodar o projeto localmente:
 
-npm, yarn ou pnpm
+### Pré-requisitos
 
-1. Clone o Repositório
+- Node.js (18.x ou superior)
+- npm, yarn ou pnpm
+
+### 1. Clone o Repositório
+
+```bash
 git clone https://github.com/seu-usuario/seu-repositorio.git
 cd seu-repositorio
+```
 
-2. Instale as Dependências
+### 2. Instale as Dependências
+
+```bash
 npm install
 # ou
 yarn install
 # ou
 pnpm install
+```
 
-3. Configure as Variáveis de Ambiente
-Crie um arquivo chamado .env.local na raiz do seu projeto. Este arquivo conterá as chaves secretas necessárias para a autenticação.
+### 3. Configure as Variáveis de Ambiente
 
+Crie o arquivo `.env.local` na raiz do projeto:
+
+```env
 # .env.local
 
-# Gere uma chave secreta forte usando: openssl rand -base64 32
+# Gere uma chave secreta usando: openssl rand -base64 32
 NEXTAUTH_SECRET="COLE_SUA_CHAVE_SECRETA_AQUI"
 
-# A URL base da sua aplicação. Para desenvolvimento local, é http://localhost:3000
+# URL base da aplicação (ex: http://localhost:3000)
 NEXTAUTH_URL="http://localhost:3000"
 
-# Exemplo para o Provider do Google (opcional)
+# (Opcional) Autenticação via Google
 # GOOGLE_CLIENT_ID="SEU_GOOGLE_CLIENT_ID"
 # GOOGLE_CLIENT_SECRET="SEU_GOOGLE_CLIENT_SECRET"
+```
 
-Importante: A variável NEXTAUTH_SECRET é obrigatória para ambientes de produção e altamente recomendada para desenvolvimento.
+> ⚠️ `NEXTAUTH_SECRET` é obrigatória em produção e recomendada no desenvolvimento.
 
-4. Execute o Servidor de Desenvolvimento
+### 4. Execute o Servidor de Desenvolvimento
+
+```bash
 npm run dev
 # ou
 yarn dev
 # ou
 pnpm dev
+```
 
-Abra http://localhost:3000 no seu navegador para ver a aplicação em funcionamento.
+Acesse `http://localhost:3000` no navegador.
 
-🛠️ Tecnologias Utilizadas
-Framework: Next.js
+---
 
-Autenticação: NextAuth.js
+## 🛠️ Tecnologias Utilizadas
 
-UI Components: Material-UI (MUI)
+- **Framework**: Next.js
+- **Autenticação**: NextAuth.js
+- **UI Components**: Material-UI (MUI)
+- **Gráficos**: @mui/x-charts
+- **Linguagem**: TypeScript
 
-Gráficos: @mui/x-charts
+---
 
-Linguagem: TypeScript
+## 📂 Estrutura do Projeto
 
-📂 Estrutura do Projeto
+```
 /
 ├── src/
 │   ├── app/
 │   │   ├── api/auth/[...nextauth]/  # Rota da API do NextAuth
-│   │   ├── analytics/               # Exemplo de página com gráficos
+│   │   ├── analytics/               # Página com gráficos
 │   │   ├── profile/                 # Página de perfil do usuário
-│   │   ├── layout.tsx               # Layout principal da aplicação
+│   │   ├── layout.tsx               # Layout principal
 │   │   └── page.tsx                 # Página inicial
-│   ├── components/                  # Componentes reutilizáveis (ex: CustomCard)
-│   ├── providers/                   # Provedores de contexto (ex: UserSessionProvider)
-│   └── lib/                         # Funções utilitárias (ex: geradores de dados)
-└── .env.local                       # Arquivo de variáveis de ambiente (não versionado)
+│   ├── components/                  # Componentes reutilizáveis
+│   ├── providers/                   # Context Providers (ex: UserSessionProvider)
+│   └── lib/                         # Utilitários e geração de dados
+└── .env.local                       # Variáveis de ambiente (não versionado)
+```
 
-🚢 Deploy na Vercel
-Para fazer o deploy deste projeto na Vercel, siga os seguintes passos:
+---
 
-Faça o push do seu código para um repositório no GitHub.
+## 🚢 Deploy na Vercel
 
-Importe o repositório na Vercel.
+Para fazer o deploy:
 
-Configure as mesmas variáveis de ambiente (NEXTAUTH_SECRET, NEXTAUTH_URL, etc.) no painel do seu projeto na Vercel (em Settings > Environment Variables).
+1. Faça push do código para um repositório no GitHub
+2. Importe o repositório na [Vercel](https://vercel.com/)
+3. Configure as **variáveis de ambiente** (`NEXTAUTH_SECRET`, `NEXTAUTH_URL`, etc.) em:
+   `Settings > Environment Variables`
+4. A Vercel detectará o projeto Next.js automaticamente e fará o deploy
 
-A Vercel irá detectar que é um projeto Next.js e fará o deploy automaticamente.
+---
+
+## 📎 Licença
+
+Este projeto é livre para uso e modificação. Considere dar os devidos créditos caso reutilize o template publicamente.
