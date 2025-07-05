@@ -1,190 +1,98 @@
-# NextJS + MaterialUI Multi-Database Frontend
+Template de Dashboard com Next.js, NextAuth e MUI
+Este é um projeto de template inicial para a criação de dashboards modernos, construído com Next.js (App Router), NextAuth.js para autenticação, Material-UI (MUI) para componentes de interface e @mui/x-charts para visualização de dados.
 
-A modern, secure, and customizable frontend application built with Next.js and Material UI to interact with dual database backends (MongoDB and PostgreSQL). Designed for white-label deployments with robust security and containerized deployment.
+O objetivo deste template é fornecer uma base sólida e pronta para uso, incluindo autenticação segura, proteção de rotas e exemplos de gráficos dinâmicos, permitindo que os desenvolvedores se concentrem na lógica de negócios específica de sua aplicação.
 
-## 🚀 Features
+✨ Principais Funcionalidades
+Autenticação Completa: Sistema de login/logout pronto para uso com NextAuth.js.
 
-- **Dual Database Architecture**
-  - MongoDB for configuration and document storage
-  - PostgreSQL for metrics, analytics, and relational data
-- **Modern Frontend Stack**
-  - Next.js App Router for efficient rendering and routing
-  - Material UI components with customizable theming
-  - TypeScript for type safety
-- **Comprehensive Security**
-  - AES-GCM encryption for sensitive data
-  - JWT authentication with secure token handling
-  - Role-based access control
-- **White-Label Customization**
-  - Dynamic theming with persistent settings
-  - Custom color palettes, typography, and layouts
-  - Client-specific branding optionsfile:///home/victorbitt/Downloads/README.md
-  
-- **Containerized Deployment**
-  - Docker and Docker Compose setup
-  - Isolated environments for development and production
-  - Simple scaling and deployment
+Proteção de Rotas: Utiliza um UserSessionProvider customizado para proteger rotas e redirecionar usuários não autenticados.
 
-## 🏗️ Architecture
+Página de Perfil: Uma página de perfil de usuário que exibe informações da sessão e permite o logout.
 
-```
-frontend_nextjs/
-├── src/
-│   ├── app/             # Next.js App Router
-│   ├── components/      # Reusable UI components
-│   ├── theme/           # Theme configuration
-│   ├── layout/          # Layout components
-│   ├── services/        # Database and API services
-│   │   ├── mongo/       # MongoDB connection and models
-│   │   └── postgres/    # PostgreSQL connection and queries
-│   └── utils/
-│       ├── crypto.ts    # AES-GCM encryption utilities
-│       └── auth.ts      # Authentication helpers
-├── public/              # Static assets
-└── docker/              # Docker configuration
-```
+Dashboard com Gráficos: Exemplos de gráficos de barras e de pizza responsivos usando @mui/x-charts com dados gerados dinamicamente.
 
-## 🚦 Getting Started
+Estrutura Moderna: Construído com o App Router do Next.js 14+ e componentes "Server-Side" e "Client-Side".
 
-### Prerequisites
+UI com Material-UI: Interface elegante e consistente utilizando a biblioteca de componentes Material-UI.
 
-- Node.js 18.x or higher
-- Docker and Docker Compose
+🚀 Como Começar
+Siga estas instruções para obter uma cópia do projeto e executá-la em sua máquina local para desenvolvimento e testes.
 
-### Local Development
+Pré-requisitos
+Node.js (versão 18.x ou superior)
 
-```bash
-# Clone the repository
-git clone <repository-url>
+npm, yarn ou pnpm
 
-# Install dependencies
+1. Clone o Repositório
+git clone https://github.com/seu-usuario/seu-repositorio.git
+cd seu-repositorio
+
+2. Instale as Dependências
 npm install
+# ou
+yarn install
+# ou
+pnpm install
 
-# Start development server
+3. Configure as Variáveis de Ambiente
+Crie um arquivo chamado .env.local na raiz do seu projeto. Este arquivo conterá as chaves secretas necessárias para a autenticação.
+
+# .env.local
+
+# Gere uma chave secreta forte usando: openssl rand -base64 32
+NEXTAUTH_SECRET="COLE_SUA_CHAVE_SECRETA_AQUI"
+
+# A URL base da sua aplicação. Para desenvolvimento local, é http://localhost:3000
+NEXTAUTH_URL="http://localhost:3000"
+
+# Exemplo para o Provider do Google (opcional)
+# GOOGLE_CLIENT_ID="SEU_GOOGLE_CLIENT_ID"
+# GOOGLE_CLIENT_SECRET="SEU_GOOGLE_CLIENT_SECRET"
+
+Importante: A variável NEXTAUTH_SECRET é obrigatória para ambientes de produção e altamente recomendada para desenvolvimento.
+
+4. Execute o Servidor de Desenvolvimento
 npm run dev
-```
+# ou
+yarn dev
+# ou
+pnpm dev
 
-### Docker Deployment
+Abra http://localhost:3000 no seu navegador para ver a aplicação em funcionamento.
 
-```bash
-# Build and start containers
-docker-compose up -d
+🛠️ Tecnologias Utilizadas
+Framework: Next.js
 
-# View logs
-docker-compose logs -f frontend
-```
+Autenticação: NextAuth.js
 
-## 💾 Database Configuration
+UI Components: Material-UI (MUI)
 
-### MongoDB Connection
+Gráficos: @mui/x-charts
 
-Used for storing:
-- User configurations
-- Document-based data
-- Application settings
+Linguagem: TypeScript
 
-```typescript
-// Example MongoDB connection
-import { MongoClient } from 'mongodb';
+📂 Estrutura do Projeto
+/
+├── src/
+│   ├── app/
+│   │   ├── api/auth/[...nextauth]/  # Rota da API do NextAuth
+│   │   ├── analytics/               # Exemplo de página com gráficos
+│   │   ├── profile/                 # Página de perfil do usuário
+│   │   ├── layout.tsx               # Layout principal da aplicação
+│   │   └── page.tsx                 # Página inicial
+│   ├── components/                  # Componentes reutilizáveis (ex: CustomCard)
+│   ├── providers/                   # Provedores de contexto (ex: UserSessionProvider)
+│   └── lib/                         # Funções utilitárias (ex: geradores de dados)
+└── .env.local                       # Arquivo de variáveis de ambiente (não versionado)
 
-const client = new MongoClient(process.env.MONGODB_URI);
-const db = client.db('app_config');
-```
+🚢 Deploy na Vercel
+Para fazer o deploy deste projeto na Vercel, siga os seguintes passos:
 
-### PostgreSQL Connection
+Faça o push do seu código para um repositório no GitHub.
 
-Used for:
-- Metrics and analytics
-- Relational data
-- Performance-critical queries
+Importe o repositório na Vercel.
 
-```typescript
-// Example PostgreSQL connection
-import { Pool } from 'pg';
+Configure as mesmas variáveis de ambiente (NEXTAUTH_SECRET, NEXTAUTH_URL, etc.) no painel do seu projeto na Vercel (em Settings > Environment Variables).
 
-const pool = new Pool({
-  connectionString: process.env.POSTGRES_URI,
-});
-```
-
-## 🎨 White-Label Theming
-
-The application supports dynamic theming for white-label customization:
-
-- **Theme Modes**: Light/Dark mode toggle with persistent settings
-- **Color Themes**: Multiple color schemes accessible through the theme drawer
-- **Typography**: Custom font selection with various options
-- **Client-Specific Branding**: Dynamic logo, favicon, and branding elements
-
-## 🔐 Security Implementation
-
-### AES-GCM Encryption
-
-Sensitive data is encrypted using AES-GCM:
-
-```typescript
-// Example encryption usage
-import { encrypt, decrypt } from '@/utils/crypto';
-
-// Encrypt sensitive data
-const encrypted = await encrypt(sensitiveData, secretKey);
-
-// Decrypt when needed
-const decrypted = await decrypt(encrypted, secretKey);
-```
-
-## 🐳 Docker Configuration
-
-The application is containerized for consistent deployment across environments:
-
-```yaml
-# Example docker-compose.yml structure
-version: '3'
-
-services:
-  frontend:
-    build:
-      context: ./frontend_nextjs
-    ports:
-      - "3000:3000"
-    environment:
-      - MONGODB_URI=mongodb://mongodb:27017/app_config
-      - POSTGRES_URI=postgresql://postgres:5432/metrics
-      
-  mongodb:
-    image: mongo
-    volumes:
-      - mongodb_data:/data/db
-      
-  postgres:
-    image: postgres
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-volumes:
-  mongodb_data:
-  postgres_data:
-```
-
-## 📚 API Documentation
-
-API endpoints are documented using Swagger/OpenAPI:
-- Authentication API: `/api/auth`
-- MongoDB data access: `/api/config`
-- PostgreSQL metrics: `/api/metrics`
-
-## 🛠️ Development Guidelines
-
-- Use TypeScript for all new components and services
-- Follow Material UI's theme specifications for consistent styling
-- Implement proper error handling for database operations
-- Keep security tokens and sensitive data in environment variables
-- Run tests before submitting pull requests
-
-## 📝 License
-
-MIT
-
----
-
-For questions or support, please contact the development team.
+A Vercel irá detectar que é um projeto Next.js e fará o deploy automaticamente.
